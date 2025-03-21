@@ -2,8 +2,8 @@ local buttons = {}
 buttons.__index = buttons
 
 --+ CONSTRUCTOR +--
-function buttons.new(x, y, w, h, image, text)
-    local i = setmetatable(buttons, {})
+function buttons:new(x, y, w, h, image, text)
+    local i = setmetatable({}, buttons)
 
     if x and y then
         i:set_position(x, y)
@@ -80,7 +80,8 @@ function buttons:draw()
         sw, sh)
     end
     if self.text then
-        local tw, th = love.graphics.getFont():getWidth(self.text)                  -- Text width
+        local tw, th = love.graphics.getFont():getWidth(self.text),
+        love.graphics.getFont():getHeight()                                         -- Text width
         local tx, ty = self.x + (self.w / 2) - tw / 2,
         self.y + (self.h / 2) - th / 2                                              -- Bottom left text corner position
         love.graphics.print(self.text, tx, ty)
